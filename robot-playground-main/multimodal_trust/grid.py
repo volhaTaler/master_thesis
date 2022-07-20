@@ -27,11 +27,11 @@ def bipolarize_pattern_robot(pattern_name):
     bimg = cv2.threshold(rimg, 125, 255, cv2.THRESH_BINARY)[1]
 
     # uncomment the below lines to see the binary images
-    # cv2.imshow("bin robo", bimg)
-    # cv2.imshow("gray robot", gimg)
-    # cv2.imshow("grsize", rimg)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow("bin robo", bimg)
+    cv2.imshow("gray robot", gimg)
+    cv2.imshow("grsize", rimg)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # convert 255 to -1 and 0 to 1
     bimg = bimg.astype('int64')
@@ -128,6 +128,8 @@ def display_image(path, image_name, timewait):
     show_img = 'eog --fullscreen ' + filename + ' &'
     time.sleep(timewait)  # this is used for training don't change
     os.system(show_img)
+
+
 
 
 

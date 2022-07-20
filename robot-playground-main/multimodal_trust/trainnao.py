@@ -3,7 +3,7 @@ from nao_imagecapture import *  # contains code to capture Nao vision
 import time
 from PIL import Image
 import constants
-from recaudio import audio_pepper
+# from recaudio import audio_pepper
 import constants
 from audio import *
 
@@ -17,6 +17,7 @@ cv2.CV_LOAD_IMAGE_COLOR = 0
 # capture images for training of the Hopfield Net
 
 for nimage in range(0, constants.ntrainimgs):
+    print(constants.get_trainimgs)
     display_image(constants.get_trainimgs, nimage, constants.time2)
     time.sleep(constants.time1)
     result, image = capture_robot_camera_nao(constants.IP, constants.PORT)
@@ -31,11 +32,12 @@ for nimage in (0,0,1,2,3,4):
 #    time.sleep(constants.time1)
 #    audio_pepper(constants.store_audio, nimage)
 #    preprocess_audio_data(constants.store_audio, nimage)
-     concat_audio_visual(constants.store_audio, constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
+    # concat_audio_visual(constants.store_audio, constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
+    concat_audio_visual(constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
 
 #bipolarise the training images and format them ready to be passed in the Hopfield net
 
 train_imgs = bipolarize_pattern_robot_train(constants.store_vatrainimgs, constants.ntrainimgs)
 
 
-np.save('/home/anna/nao_trust_2/multimodal_trust/store_train_audioimg/train_imgs.npy', train_imgs)
+np.save('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_train_audioimg/train_imgs.npy', train_imgs)

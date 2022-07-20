@@ -264,7 +264,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
                     future_action = current_action + 1
             r_old = r_current
 
-        ''' or the agent choosing ita future action '''
+            ''' or the agent choosing ita future action '''
 
         else:
             future_q, future_action = eps_greedy(q, future_state)

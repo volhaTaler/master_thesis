@@ -76,15 +76,15 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         # record_audio
         #time.sleep(3)
         #audio_pepper(constants.store_audio, start_image)
-        rimg, rimg_flatten = preprocess_audio_data(constants.store_audio, start_image)
+        # rimg, rimg_flatten = preprocess_audio_data(constants.store_audio, start_image) -> here we preprossess audio into images start_image is a number
 
-
-        noise_audio = sp_noise_game(rimg, 0.99)
+        # because we do not need audio, we comment out its preprosessing
+        # noise_audio = sp_noise_game(rimg, 0.99)
 
         filename_aud = 'start_aud.png'
         cv2.imwrite(filename_aud, noise_audio)
         #
-        concat_audio_visual2(filename_aud, '/home/anna/nao_trust_2/multimodal_trust/', constants.store_vagameimgs,
+        concat_audio_visual2(filename_aud, '/home/volha/Desktop/MSC/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs,
                                  start_image)
 
 

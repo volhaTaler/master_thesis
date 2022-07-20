@@ -1,22 +1,22 @@
 
 # file locations
-audio_path = '/home/anna/nao_trust_2/multimodal_trust/store_audio/'
-get_gameimages = '/home/anna/nao_trust_2/multimodal_trust/gameimg/'  # bipolar, low res images for game play are saved here, need to be named with integer numbers (e.g. 1.png)
-store_gameimages = '/home/anna/nao_trust_2/multimodal_trust/store_gameimg/'  # image storage for Nao captures
-store_vagameimgs = '/home/anna/nao_trust_2/multimodal_trust/gameimg/gameimgva/' # concat image storage game, used in Hopfield
+# audio_path = '/home/volha/desktop/msc/master_thesis/robot-playground-main/multimodal_trust/store_audio/'
+get_gameimages = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/gameimg/'  # bipolar, low res images for game play are saved here, need to be named with integer numbers (e.g. 1.png)
+store_gameimages = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_gameimg/'  # image storage for Nao captures
+store_vagameimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/gameimg/gameimgva/' # concat image storage game, used in Hopfield
 
-store_grids = '/home/anna/nao_trust_2/multimodal_trust/gamegrid/'  # location of all grids
-get_trainimgs = '/home/anna/nao_trust_2/multimodal_trust/trainimg/' # location of training images
-store_vtrainimgs = '/home/anna/nao_trust_2/multimodal_trust/store_trainimg/' # location of training images
-store_vatrainimgs = '/home/anna/nao_trust_2/multimodal_trust/store_train_audioimg/' # location of training images visual audio
+store_grids = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/gamegrid/'  # location of all grids
+get_trainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/trainimg/' # location of training images
+store_vtrainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_trainimg/' # location of training images
+store_vatrainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_train_audioimg/' # location of training images visual audio
 
-store_captured = '/home/anna/nao_trust_2/multimodal_trust/store_captured/'
-outputs_location = '/home/anna/nao_trust_2/multimodal_trust/outputs/'
-store_audio = '/home/anna/nao_trust_2/multimodal_trust/store_audio/' # image storage for human speech training
+store_captured = '/home/volha/Desktop/Msc/master_thesis/robot-playground-main/multimodal_trust/store_captured/'
+outputs_location = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/'
+# store_audio = '/home/volha/desktop/msc/master_thesis/robot-playground-main/multimodal_trust/store_audio/' # image storage for human speech training
 
 # Nao set up
-IP = "192.168.0.165" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
-IP2 = "192.168.0.171" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
+IP = "192.168.0.131" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
+IP2 = "192.168.0.131" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
 PORT = 9559  # Nao port, should remain unchanged
 
 # The coordinates for cropping the image to the correct frame (manually generated from a captured example)

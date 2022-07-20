@@ -34,15 +34,17 @@ def generate_reward(train_images, current_state, current_action, img_c, img_f):
 
     # run the image trough the hopfield to generate an energy
     weights_h = calc_weights(train_images)
-
+    
     filename_1 = constants.store_vagameimgs + '%s.png' % img_c
     print(filename_1)
     filename_2 = constants.store_vagameimgs + '%s.png' % img_f
     print(filename_2)
     current_pattern = bipolarize_pattern_robot(filename_1)
     future_pattern = bipolarize_pattern_robot(filename_2)
+    print("checkpoint reward 1")
     new_s1, changed_bits1, state_changes1, epochs1 = calc_stateupdate_async(current_pattern, weights_h, 1000, 1000)
     new_s2, changed_bits2, state_changes2, epochs2 = calc_stateupdate_async(future_pattern, weights_h, 1000, 1000)
+    print("checkpoint reward 2")
     energy_state = changed_bits1
     energy_action = changed_bits2
     #if energy_state < energy_action:
@@ -50,6 +52,7 @@ def generate_reward(train_images, current_state, current_action, img_c, img_f):
     #else:
        # reward = 1
     reward = energy_state - energy_action
+    print("new reward; ", reward)
 
 
     return reward, energy_state, energy_action
@@ -108,10 +111,11 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         image_future = random.randint(0, constants.ntrainimgs - 1)
         while image_future == image_current:
             image_future = random.randint(0, constants.ntrainimgs -1)
+            print('still in the loop')
 
         ''' uncomment the next line for a  realistic interaction with speech '''
 
-        #speech_choose_image(current_action)
+        speech_choose_image(current_action)
 
         display_image(constants.store_grids, 'yellowgrid%s' % current_action, constants.time3)
 
@@ -126,18 +130,21 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
         display_image(constants.store_gameimages, image_future, constants.time2)
         time.sleep(constants.time6)
+        
         result, image = capture_robot_camera_nao(constants.IP, constants.PORT)
         img = Image.fromarray(image)
+        print("checkpoint 2")
         img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
+        print("checkpoint 3")
         filename = constants.store_captured + '%s' % image_future + '.png'
         img_res.save(filename)
-
+        print("checkpoint 1")
 
         ''' assistant providing audio depending on reward gained '''
 
         if r_current < 0:
-            #speech_other("I am not doing so well, please help me.")
-            #speech_other2("I will tell you what that is.")
+            speech_other("I am not doing so well, please help me.")
+            speech_other2("I will tell you what that is.")
             if condition == 1: #helpful assistant
                 audio_pepper(constants.store_audio, image_future)
                 rimg, rimg_flatten = preprocess_audio_data(constants.store_audio, image_future)
@@ -163,22 +170,23 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
 
 
-        if r_current < 0:
+        # if r_current < 0:
 
-            noise_audio = sp_noise_game(rimg, constants.probabilities[current_action])
+        #    noise_audio = sp_noise_game(rimg, constants.probabilities[current_action])
 
-        else:
-            noise_audio = sp_noise_game(rimg, 0.99)
+        # else:
+        #     noise_audio = sp_noise_game(rimg, 0.99)
 
-        filename_aud = constants.store_audio + '%s.png' %image_future  # use image_future to be in line with image
-        cv2.imwrite(filename_aud, noise_audio)
+        # filename_aud = constants.store_audio + '%s.png' %image_future  # use image_future to be in line with image
+        # cv2.imwrite(filename_aud, noise_audio)
 
-        concat_audio_visual(constants.store_audio, constants.store_captured, constants.store_vagameimgs, image_future)
+        concat_audio_visual(constants.store_captured, constants.store_vagameimgs, image_future)
 
         ''' pass current and futute states into the reward function '''
+        
 
         r_current, energy_current, energy_future = generate_reward(train_images, state_no, current_action, image_current, image_future)
-
+        print("checkpoint 4")
         ''' generate the trust value if help was requested in the previous state '''
 
         if help == 1:

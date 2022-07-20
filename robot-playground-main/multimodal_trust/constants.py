@@ -10,13 +10,13 @@ get_trainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/mul
 store_vtrainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_trainimg/' # location of training images
 store_vatrainimgs = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_train_audioimg/' # location of training images visual audio
 
-store_captured = '/home/volha/Desktop/Msc/master_thesis/robot-playground-main/multimodal_trust/store_captured/'
+store_captured = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_captured/'
 outputs_location = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/'
-# store_audio = '/home/volha/desktop/msc/master_thesis/robot-playground-main/multimodal_trust/store_audio/' # image storage for human speech training
+store_audio = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_audio/' # image storage for human speech training
 
 # Nao set up
 IP = "192.168.0.131" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
-IP2 = "192.168.0.131" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
+IP2 = "192.168.0.141" # '141.23.190.106' #'172.20.10.5' #  # Nao's IP address, read nao_tutorial1 for more
 PORT = 9559  # Nao port, should remain unchanged
 
 # The coordinates for cropping the image to the correct frame (manually generated from a captured example)
@@ -30,7 +30,7 @@ time1 = 0.35  # time sleep after grid is shown
 time2 = 0.5  # time to wait after image display
 time3 = 2 #time wait after grid display
 time4 = 2
-time5 = 5
+time5 = 1 # 5
 time6 = 0.3
 time7 = 3
 

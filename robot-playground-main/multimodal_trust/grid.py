@@ -27,16 +27,20 @@ def bipolarize_pattern_robot(pattern_name):
     bimg = cv2.threshold(rimg, 125, 255, cv2.THRESH_BINARY)[1]
 
     # uncomment the below lines to see the binary images
-    cv2.imshow("bin robo", bimg)
-    cv2.imshow("gray robot", gimg)
-    cv2.imshow("grsize", rimg)
+    # cv2.imshow("bin robo", bimg)
+    # cv2.imshow("gray robot", gimg)
+    # cv2.imshow("grsize", rimg)
     cv2.waitKey(0)
+   
     cv2.destroyAllWindows()
 
     # convert 255 to -1 and 0 to 1
     bimg = bimg.astype('int64')
+    print("bipolorized 2")
     nonz_inds = bimg.nonzero()
+    print("bipolorized 3")
     bimg[nonz_inds], bimg[bimg == 0] = -1, 1  # convert 255 to -1 and 0 to 1
+    print("bipolorized 4")
 
     return bimg.flatten()
 

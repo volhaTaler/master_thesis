@@ -162,18 +162,18 @@ def concat_audio_visual(visual_img_path, savepath, imgn):
     plt.imsave(savename, rimg_v, cmap = 'Greys')
 
 # def concat_audio_visual2(audio_img_path, visual_img_path, savepath, imgn):
+def concat_audio_visual2(visual_img_path, savepath, imgn):
+    #   img_a = cv2.imread(audio_img_path, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+    #    img_a = inverted_image = cv2.bitwise_not(img_a)
+    #    rimg_a = cv2.resize(img_a, constants.rsize, interpolation=cv2.INTER_AREA)
 
-#   img_a = cv2.imread(audio_img_path, cv2.CV_LOAD_IMAGE_GRAYSCALE)
-#    img_a = inverted_image = cv2.bitwise_not(img_a)
-#    rimg_a = cv2.resize(img_a, constants.rsize, interpolation=cv2.INTER_AREA)
-
-    #rimg_a = cv2.resize(img_a, constants.rsize, interpolation=cv2.INTER_AREA)
-#    bimg_a = cv2.threshold(rimg_a, 125, 255, cv2.THRESH_BINARY)[1]
-#    img_v = cv2.imread(visual_img_path + '%s.png' % imgn, cv2.CV_LOAD_IMAGE_GRAYSCALE)
-#    img_v = inverted_image = cv2.bitwise_not(img_v)
-#    rimg_v = cv2.resize(img_v, constants.rsize, interpolation=cv2.INTER_AREA)
-    #bimg_v = cv2.threshold(rimg_v, 125, 255, cv2.THRESH_BINARY)[1]
+    # rimg_a = cv2.resize(img_a, constants.rsize, interpolation=cv2.INTER_AREA)
+    #    bimg_a = cv2.threshold(rimg_a, 125, 255, cv2.THRESH_BINARY)[1]
+    img_v = cv2.imread(visual_img_path + '%s.png' % imgn, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+    img_v = inverted_image = cv2.bitwise_not(img_v)
+    rimg_v = cv2.resize(img_v, constants.rsize, interpolation=cv2.INTER_AREA)
+    bimg_v = cv2.threshold(rimg_v, 125, 255, cv2.THRESH_BINARY)[1]
 #    image_h = cv2.hconcat([bimg_a, rimg_v])
-#    savename = savepath + '%s.png' % imgn
+    savename = savepath + '%s.png' % imgn
 
-#   plt.imsave(savename, image_h, cmap = 'Greys')
+    plt.imsave(savename, bimg_v, cmap = 'Greys')

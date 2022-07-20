@@ -50,9 +50,9 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     for run in range(0, constants.nruns):
         start_state = 5  # the middle position of the grid
         start_image = random.randint(0, constants.ntrainimgs - 1)
-        #print(q)
-        #speech_other("Hello other Nao, let us play the game together. Please open the game grid.")
-        #speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
+        print(q)
+        speech_other("Hello other Nao, let us play the game together. Please open the game grid.")
+        speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
         time.sleep(constants.time4)
         display_image(constants.store_grids, 'basegrid', constants.time3)
         speech_choose_image(start_state)
@@ -76,21 +76,23 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         # record_audio
         #time.sleep(3)
         #audio_pepper(constants.store_audio, start_image)
+        # we comment out this line because we do not need audio file.
         # rimg, rimg_flatten = preprocess_audio_data(constants.store_audio, start_image) -> here we preprossess audio into images start_image is a number
 
         # because we do not need audio, we comment out its preprosessing
         # noise_audio = sp_noise_game(rimg, 0.99)
 
-        filename_aud = 'start_aud.png'
-        cv2.imwrite(filename_aud, noise_audio)
-        #
-        concat_audio_visual2(filename_aud, '/home/volha/Desktop/MSC/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs,
-                                 start_image)
+        # filename_aud = 'start_aud.png'
+        # cv2.imwrite(filename_aud, noise_audio)
+        # concat_audio_visual2(filename_aud, '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs,
+        #                         start_image)
+        concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs, start_image)
 
 
         final_state, generated_q, total_energy_by_state, no_of_state_visits, total_reward, total_energy, cumulative_reward, cumulative_energy, total_reward_by_state, td_storage, iter, trust_value, help_requests = update_q(train_images, start_state, start_image, constants.iterations, q, cumulative_reward, cumulative_energy, total_reward, total_energy, no_of_state_visits, total_energy_by_state, total_reward_by_state, td_storage, i, condition, trust_value, help_requests)
         q = generated_q
         i = iter
+        print("DONE!")
 
         # save all relevant output from runs
 

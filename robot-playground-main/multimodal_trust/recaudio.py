@@ -2,7 +2,7 @@ import numpy as np
 import time
 import os
 from termcolor import colored, cprint
-# import sounddevice as sd
+import sounddevice as sd
 from scipy.io.wavfile import write
 import constants
 from naoqi import ALProxy

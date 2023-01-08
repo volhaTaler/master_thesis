@@ -24,6 +24,8 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     np.save(filename1, q)
     cumulative_reward = np.zeros(constants.iterations*constants.nruns)
     cumulative_energy = np.zeros(constants.iterations * constants.nruns)
+    rew_each_step_social_cue = np.zeros(constants.iterations * constants.nruns)
+    rew_each_step_cogn_cue = np.zeros(constants.iterations * constants.nruns)
     total_reward = 0
     total_energy = 0
     trust_value = 0
@@ -38,7 +40,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
 
     if repeat == 1 or repeat == 2 or repeat == 3 or repeat == 4 or repeat == 5 or repeat == 6:
 
-        condition = 1
+        condition = 2
 
     #if repeat == 7 or repeat == 8 or repeat == 9 or repeat == 10 or repeat == 11 or repeat == 12:
 
@@ -46,29 +48,33 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
    # else:
        # condition = 3
 
-    speech_choose_condition(condition)
+    # speech_choose_condition(condition) 
+    # --> the Nao partner chooses the condition, but in our scenario a human partner defines this.
     for run in range(0, constants.nruns):
         start_state = 5  # the middle position of the grid
         start_image = random.randint(0, constants.ntrainimgs - 1)
         print(q)
-        speech_other("Hello other Nao, let us play the game together. Please open the game grid.")
-        speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
+        speech_other("Hello my friend, let us play the game together. Please open the game grid.")
+        #speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
         time.sleep(constants.time4)
         display_image(constants.store_grids, 'basegrid', constants.time3)
-        speech_choose_image(start_state)
+        speech_choose_image(start_state)# --> what happens after the robot chose the image? -- for the cording of the video.
+        finish_display_image()
         display_image(constants.store_grids, 'yellowgrid%s' % start_state, constants.time3)
         # display_grid('yellowgrid%s' % start_state)
 
         noise_img = sp_noise(constants.get_gameimages, start_image, constants.probabilities[start_state])
 
-        filename = constants.store_gameimages + '%s' % start_image + '.png'
+        filename = constants.store_imageswnoise  + '%s' % start_image + '.png'
         cv2.imwrite(filename, noise_img)
+        finish_display_image()
         time.sleep(constants.time5)
-        display_image(constants.store_gameimages, start_image, constants.time2)
+        display_image(constants.store_imageswnoise , start_image, constants.time2) # why should we display image again?
         time.sleep(constants.time6)
         result, image = capture_robot_camera_nao(constants.IP, constants.PORT)
         img = Image.fromarray(image)
         img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
+        finish_display_image()
 
         filename_vis = '%s.png' % start_image
         img_res.save(filename_vis)
@@ -86,10 +92,12 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         # cv2.imwrite(filename_aud, noise_audio)
         # concat_audio_visual2(filename_aud, '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs,
         #                         start_image)
-        concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs, start_image)
 
+        # should we chnage something here? because we do not have audio file to concatenate.
+        concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_gameimages, start_image)
+        # bipolarize_pattern_robot(constants.store_gameimgs, no_imgs) # to change
 
-        final_state, generated_q, total_energy_by_state, no_of_state_visits, total_reward, total_energy, cumulative_reward, cumulative_energy, total_reward_by_state, td_storage, iter, trust_value, help_requests = update_q(train_images, start_state, start_image, constants.iterations, q, cumulative_reward, cumulative_energy, total_reward, total_energy, no_of_state_visits, total_energy_by_state, total_reward_by_state, td_storage, i, condition, trust_value, help_requests)
+        final_state, generated_q, total_energy_by_state, no_of_state_visits, total_reward, total_energy, cumulative_reward, cumulative_energy, total_reward_by_state, td_storage, iter, trust_value, help_requests, rew_each_step_cogn_cue, rew_each_step_social_cue = update_q(train_images, start_state, start_image, constants.iterations, q, cumulative_reward, cumulative_energy, total_reward, total_energy, no_of_state_visits, total_energy_by_state, total_reward_by_state, td_storage, i, condition, trust_value, help_requests, rew_each_step_cogn_cue, rew_each_step_social_cue)
         q = generated_q
         i = iter
         print("DONE!")
@@ -120,9 +128,10 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     np.save(filename11, total_energy)
     filename12 = constants.outputs_location + '%s_help' % repeat
     np.save(filename12, help_requests)
-
-
-
+    filename13 = constants.outputs_location + '%s_cogn_reward_per_step' % repeat
+    np.save(filename13, rew_each_step_cogn_cue)
+    filename14 = constants.outputs_location + '%s_social_reward_per_step' % repeat
+    np.save(filename14, rew_each_step_social_cue)
 
 
     print('the total iterations was: ', i)

@@ -34,7 +34,7 @@ def audio_human(audiopath, audion):
 
     #time.sleep(1) # this is the magic number
 
-    print " ...... audio captured"
+    print (" ...... audio captured")
 
     return myrecording
 
@@ -79,7 +79,7 @@ def audio_pepper(audiopath, audion):
 
     #time.sleep(1) # this is the magic number
 
-    print "audio captured"
+    print ("audio captured")
 
 
 

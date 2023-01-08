@@ -7,7 +7,7 @@ import constants
 import constants
 from audio import *
 
-'''This script trains the Hopfield Network. The palying Nao needs to be placed in front of an external monitor. 
+'''This script trains the Hopfield Network. The playing Nao needs to be placed in front of an external monitor. 
  The training images will be displayed on the external monitor. The speaking Nao needs to be equipped with a micro and
  placed near the playing Nao. The speaking Nao will say each word once. The images and sound will be cncatenated and saved.'''
 
@@ -25,15 +25,16 @@ for nimage in range(0, constants.ntrainimgs):
     img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
     filename = constants.store_vtrainimgs + '%s' % nimage + '.png'
     img_res.save(filename)
+    finish_display_image()
 
 time.sleep(1)
 
-for nimage in (0,0,1,2,3,4):
+# for nimage in (0,0,1,2,3,4):
 #    time.sleep(constants.time1)
 #    audio_pepper(constants.store_audio, nimage)
 #    preprocess_audio_data(constants.store_audio, nimage)
-    # concat_audio_visual(constants.store_audio, constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
-    concat_audio_visual(constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
+# concat_audio_visual(constants.store_audio, constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
+#   concat_audio_visual(constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
 
 #bipolarise the training images and format them ready to be passed in the Hopfield net
 

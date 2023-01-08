@@ -30,6 +30,8 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     total_reward_by_state = np.zeros(constants.length)
     td_storage = np.zeros(constants.iterations*constants.nruns+1)
     i = 0
+    # here we are talking about episodes. 
+    # One episode: a sequence of  states, actions and rewards which ends with terminal state.
     for run in range(0, constants.nruns):
         start_state = 5  # the middle position of the grid
         #print(q)
@@ -71,7 +73,8 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     no_iterations = int(state_visits.sum()-1)
 
     # plot of cumulative rewards over iteration steps
-
+    
+    # iterations: max number of moveents in one run (episode)
     iterations = np.arange(0, len(cumulative_reward), 1)
     plt.figure()
     plt.plot(iterations, cumulative_reward[:constants.iterations*constants.nruns])

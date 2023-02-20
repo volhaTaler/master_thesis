@@ -8,10 +8,11 @@ import numpy as np
 import Tkinter
 import os
 import random
+import constants
 import time
 
-TRUST_IMG_FOLDER ="/home/volha/Desktop/MSc/master_thesis/peppercam13"
-UNTRUST_IMG_FOLDER = "/home/volha/Desktop/MSc/master_thesis/peppercam13"
+TRUST_IMG_FOLDER = "/home/volha/Desktop/MSc/MSC_data/trail/images.05.01.23_cond1"
+UNTRUST_IMG_FOLDER = "/home/volha/Desktop/MSc/MSC_data/trail/images.05.01.23_cond2"
 
 def predict_intention(condition=0, offline_mode=True):
 
@@ -24,7 +25,7 @@ def predict_intention(condition=0, offline_mode=True):
     motion =  ALProxy("ALMotion", robotIP, 9559)
 
     videoDevice_nao = ALProxy('ALVideoDevice', robotIP, PORT)
-    filename = '/home/volha/Desktop/MSc/master_thesis/logs/precition_logfile_non_trustworthy_online_cond2_06.01.2023.txt'
+    filename = '/home/volha/Desktop/MSc/master_thesis/logs/online_cond3_20.02.23.txt'
    
      # positive numbers - interaction partner is on the right
     
@@ -37,14 +38,20 @@ def predict_intention(condition=0, offline_mode=True):
             image_path = choose_image(condition=2)
             display_img_screen(image_path) 
 
-      
+    time.sleep(0.7)
     result, image = capture_robot_camera_nao(videoDevice_nao, SubID)
+    time.sleep(0.5)
     img = Image.fromarray(image)
+    if(offline_mode):
+        # To adjust
+        img = img.crop((constants.p_left, constants.p_top, constants.p_right, constants.p_bottom))
     dt = datetime.datetime.now()
     timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
-    img_name = '/home/volha/Desktop/MSc/master_thesis/trail/images_06.01.23_cond2/' + timestamp + '_cond_2.png' 
+    ### MUST BE CHANGED FOR EVERY strategy##
+    img_name = '/home/volha/Desktop/MSc/master_thesis/trail/online_cond3_20.02.23/' + timestamp + '_cond3.png' 
     img.save(img_name)
     if(offline_mode):
+        time.sleep(0.3)
         finish_display_image()
     
     # here start script for mediapipe
@@ -55,15 +62,7 @@ def predict_intention(condition=0, offline_mode=True):
         file.write(img_name + "\t" + prediciton + "\n")
 
     print(prediciton)
-    # motion.setAngles("HeadYaw", -0.6, 0.1)
-    # time.sleep(1.5)
-    # motion.setAngles("HeadYaw", 0.0, 0.1)
-    # time.sleep(1.5)
-    # motion.setAngles("HeadPitch", 0.0, 0.15) 
-    # time.sleep(2)
-
-    # print("DONE")
-    # time.sleep(2)
+    
     return prediciton
 
 def process_image(pth_to_image):
@@ -82,7 +81,7 @@ def choose_image(condition):
     elif (condition == 2):
         return UNTRUST_IMG_FOLDER + "/" + random.choice(os.listdir(UNTRUST_IMG_FOLDER))
     else: 
-        return "NOT FOUND"
+        return "IMAGE OR FOLDER NOT FOUND"
 
 def display_img_screen(img):
    """ Show the image in fullscreen on the experiment monitor"""

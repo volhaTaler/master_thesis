@@ -15,7 +15,7 @@ cv2.CV_LOAD_IMAGE_GRAYSCALE = 0
 cv2.CV_LOAD_IMAGE_COLOR = 0
 
 # capture images for training of the Hopfield Net
-
+time.sleep(2)
 for nimage in range(0, constants.ntrainimgs):
     print(constants.get_trainimgs)
     display_image(constants.get_trainimgs, nimage, constants.time2)
@@ -25,6 +25,7 @@ for nimage in range(0, constants.ntrainimgs):
     img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
     filename = constants.store_vtrainimgs + '%s' % nimage + '.png'
     img_res.save(filename)
+    time.sleep(constants.time1)
     finish_display_image()
 
 time.sleep(1)

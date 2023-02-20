@@ -13,7 +13,10 @@ with open(sys.argv[2], "rb") as model:
     img_path = cv2.imread(path)
     temp = []
     mpPose = mp.solutions.pose
-    pose = mpPose.Pose()
+    pose = mpPose.Pose(static_image_mode=True,
+    model_complexity=2,
+    enable_segmentation=True,
+    min_detection_confidence=0.5)
     mpDraw = mp.solutions.drawing_utils
     #img = cv2.imread(img_path)
     imgRGB = cv2.cvtColor(img_path, cv2.COLOR_BGR2RGB)

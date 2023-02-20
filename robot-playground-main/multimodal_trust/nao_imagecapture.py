@@ -23,9 +23,9 @@ def capture_robot_camera_nao(NAO_IP, PORT):
     result = videoDevice_nao.getImageRemote(captureDevice_nao)
 
     if result == None:
-        print "Camera problem."
+        print("Camera problem.")
     elif result[6] == None:
-        print "No image. "
+        print("No image. ")
     else:
         # translate value to mat
         values = map(ord, list(result[6]))
@@ -40,6 +40,7 @@ def capture_robot_camera_nao(NAO_IP, PORT):
     # unsubscribe from the camera
     videoDevice_nao.unsubscribe(captureDevice_nao)
     return result[6], image
+    
 
 
 

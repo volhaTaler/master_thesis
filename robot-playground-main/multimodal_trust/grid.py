@@ -133,6 +133,18 @@ def display_image(path, image_name, timewait):
     time.sleep(timewait)  # this is used for training don't change
     os.system(show_img)
 
+def finish_display_image():
+    """Closes the window that displays the chosen image in full screen
+    Parameters
+    ----------
+    path: filename
+    location where the image is located
+    image_number: output from the Hopfield, the number of the image to be displayed.
+
+    """
+    done = "pkill eog"
+    os.system(done)
+
 
 
 

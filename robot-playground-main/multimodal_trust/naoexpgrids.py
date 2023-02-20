@@ -6,6 +6,7 @@ from PIL import Image
 import constants
 import random
 from audio import *
+import datetime
 
 from wn import *
 
@@ -25,7 +26,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     cumulative_reward = np.zeros(constants.iterations*constants.nruns)
     cumulative_energy = np.zeros(constants.iterations * constants.nruns)
     rew_each_step_social_cue = np.zeros(constants.iterations * constants.nruns)
-    rew_each_step_cogn_cue = np.zeros(constants.iterations * constants.nruns)
+    rew_each_step_cogn_cue = np.zeros( constants.iterations * constants.nruns) 
     total_reward = 0
     total_energy = 0
     trust_value = 0
@@ -36,11 +37,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     td_storage = np.zeros(constants.iterations*constants.nruns+1)
     i = 0
     # set run condition
-    print('repeat:',  repeat)
-
-    if repeat == 1 or repeat == 2 or repeat == 3 or repeat == 4 or repeat == 5 or repeat == 6:
-
-        condition = 2
+    condition = 3
 
     #if repeat == 7 or repeat == 8 or repeat == 9 or repeat == 10 or repeat == 11 or repeat == 12:
 
@@ -54,11 +51,11 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         start_state = 5  # the middle position of the grid
         start_image = random.randint(0, constants.ntrainimgs - 1)
         print(q)
-        speech_other("Hello my friend, let us play the game together. Please open the game grid.")
+        # speech_other("Hello my friend, let us play the game together. Please open the game grid.")
         #speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
         time.sleep(constants.time4)
         display_image(constants.store_grids, 'basegrid', constants.time3)
-        speech_choose_image(start_state)# --> what happens after the robot chose the image? -- for the cording of the video.
+        # speech_choose_image(start_state)# --> what happens after the robot chose the image? -- for the cording of the video.
         finish_display_image()
         display_image(constants.store_grids, 'yellowgrid%s' % start_state, constants.time3)
         # display_grid('yellowgrid%s' % start_state)
@@ -67,17 +64,20 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
 
         filename = constants.store_imageswnoise  + '%s' % start_image + '.png'
         cv2.imwrite(filename, noise_img)
+    
         finish_display_image()
-        time.sleep(constants.time5)
+        # time.sleep(constants.time5)
         display_image(constants.store_imageswnoise , start_image, constants.time2) # why should we display image again?
-        time.sleep(constants.time6)
+        time.sleep(0.5)
         result, image = capture_robot_camera_nao(constants.IP, constants.PORT)
+        time.sleep(0.5)
+        time.sleep(constants.time6)
         img = Image.fromarray(image)
         img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
-        finish_display_image()
-
+        
         filename_vis = '%s.png' % start_image
         img_res.save(filename_vis)
+        finish_display_image()
 
         # record_audio
         #time.sleep(3)
@@ -92,7 +92,10 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         # cv2.imwrite(filename_aud, noise_audio)
         # concat_audio_visual2(filename_aud, '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_vagameimgs,
         #                         start_image)
-
+        dt = datetime.datetime.now()
+        timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
+        img_name = '/home/volha/Desktop/MSc/master_thesis/trail/test_captured/' + timestamp + '_captured_start.png' 
+        img_res.save(img_name)
         # should we chnage something here? because we do not have audio file to concatenate.
         concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_gameimages, start_image)
         # bipolarize_pattern_robot(constants.store_gameimgs, no_imgs) # to change
@@ -135,5 +138,6 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
 
 
     print('the total iterations was: ', i)
+    print('repeat:',  repeat)
 
 

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.io import wavfile
 import cv2
 import constants
+import datetime
 
 # def prepro_audio(audio_path, audio_name, imgn):
 #    ''' Preprocesses the audio files in wav format. Generates a 2x2 grid of the bipolarised spectogram
@@ -143,6 +144,8 @@ def hopfield_format(path, no_imgs):
     return images
 
 def concat_audio_visual(visual_img_path, savepath, imgn):
+    """ After deleting audio data, we just preprocess video image for hopfield network?
+    """
     # file_a = audio_img_path + '%s.png' % imgn
     # print(file_a)
     # img_a = cv2.imread(file_a, cv2.CV_LOAD_IMAGE_GRAYSCALE)
@@ -172,8 +175,11 @@ def concat_audio_visual2(visual_img_path, savepath, imgn):
     img_v = cv2.imread(visual_img_path + '%s.png' % imgn, cv2.CV_LOAD_IMAGE_GRAYSCALE)
     img_v = inverted_image = cv2.bitwise_not(img_v)
     rimg_v = cv2.resize(img_v, constants.rsize, interpolation=cv2.INTER_AREA)
-    bimg_v = cv2.threshold(rimg_v, 125, 255, cv2.THRESH_BINARY)[1]
+    bimg_v = cv2.threshold(rimg_v, 125, 255, cv2.THRESH_BINARY)[1] #it was 125 before 10 --> it was 10 before 18.02.23
 #    image_h = cv2.hconcat([bimg_a, rimg_v])
     savename = savepath + '%s.png' % imgn
-
+    # dt = datetime.datetime.now()
+    # timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
+    # img_name = '/home/volha/Desktop/MSc/master_thesis/trail/test_captured/' + timestamp + '_gameimg.png' 
+    # plt.imsave(img_name, bimg_v, cmap = 'Greys')
     plt.imsave(savename, bimg_v, cmap = 'Greys')

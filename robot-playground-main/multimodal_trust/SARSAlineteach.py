@@ -7,6 +7,7 @@ from audio import *
 from recaudio import *
 import random
 from wn import *
+import datetime
 
 import image_integration
 
@@ -41,6 +42,7 @@ def generate_reward(train_images, current_state, current_action, img_c, img_f):
     print(filename_1)
     filename_2 = constants.store_gameimages+ '%s.png' % img_f
     print(filename_2)
+
     current_pattern = bipolarize_pattern_robot(filename_1)
     future_pattern = bipolarize_pattern_robot(filename_2)
     print("checkpoint reward 1")
@@ -119,7 +121,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
         ''' uncomment the next line for a  realistic interaction with speech '''
 
-        speech_choose_image(current_action)
+        #speech_choose_image(current_action)
 
         display_image(constants.store_grids, 'yellowgrid%s' % current_action, constants.time3)
 
@@ -128,15 +130,14 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         noise_img = sp_noise(constants.get_gameimages, image_future, constants.probabilities[current_action])
         filename = constants.store_imageswnoise  + '%s' % image_future + '.png'
         cv2.imwrite(filename, noise_img)
-
-        time.sleep(constants.time5)
+        time.sleep(constants.time7)
         finish_display_image()
 
 
         display_image(constants.store_imageswnoise , image_future, constants.time2)
         time.sleep(constants.time6)
-        
         result, image = capture_robot_camera_nao(constants.IP, constants.PORT)
+        time.sleep(constants.time6)
         img = Image.fromarray(image)
         print("checkpoint 2")
         img_res = img.crop((constants.left, constants.top, constants.right, constants.bottom))
@@ -145,7 +146,12 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         img_res.save(filename)
         filename_vis = '%s.png' % image_future
         img_res.save(filename_vis)
+        # dt = datetime.datetime.now()
+        # timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
+        # img_name = '/home/volha/Desktop/MSc/master_thesis/trail/test_captured/' + timestamp + '_captured.png' 
+        # img_res.save(img_name)
         concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_gameimages, image_future)
+        time.sleep(0.5)
         finish_display_image()
         print("checkpoint 1")
 
@@ -186,7 +192,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         print("cue_reward ", cue_reward)
         rew_each_step_cogn_cue[i] = r_current
         r_current += int(cue_reward)
-        rew_each_step_social_cue[i] = cue_reward
+        rew_each_step_social_cue[i] = int(cue_reward)
         cue_reward = 0
         print("checkpoint 4")
         ''' generate the trust value if help was requested in the previous state '''
@@ -257,6 +263,11 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
             return future_state, q, total_energy_by_state, no_of_state_visits, total_reward, total_energy, cumulative_reward, cumulative_energy, total_reward_by_state, td_storage, i, trust_value, help_requests, rew_each_step_cogn_cue, rew_each_step_social_cue
 
+
+        ''' Dynamic desicion . minimum iterations that are required
+        sarsa sabilisation
+
+        '''
         ''' assistant suggesting direction if the reward is negative '''
 
         if r_current < 0:
@@ -264,9 +275,9 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
             if condition == 1: # helpful assistant
                 future_action = current_action - 1
-            if condition == 2: # unhelpful assistant
+            if condition == 2 or condition== 3: # unhelpful assistant
                 future_action = current_action + 1
-            if condition == 4 or condition == 3: # random assistant and deceptive assistant
+            if condition == 4: # random assistant and deceptive assistant
                 value = np.random.uniform(low=0, high=1, size=1)
 
                 if value >= 0.5:

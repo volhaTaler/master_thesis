@@ -25,10 +25,10 @@ PORT = 9559  # Nao port, should remain unchanged
 # right = 234 #265 #255  # x right
 # bottom = 236 #240  # y bottom
 # Cropping for online strategy
-left =  6  # x left
-top = 95  # y top
-right = 81 #265 #255  # x right
-bottom = 167 #240  # y bottom
+left =  13  # x left
+top = 92  # y top
+right =109 #265 #255  # x right
+bottom = 189 #240  # y bottom
 # the coordinates to crop images with social cues from pepper
 p_left =  20 #70  # x left
 p_top = 40 #55  # y top
@@ -49,7 +49,7 @@ length = 11  # the length of the game grid
 # Note: width x length images need to be located in get_gameimages, named 0.png to width x length in integers
 nruns = 10 # number of runs -- episodes
 iterations = 20 # iteration to run the SARSA for
-repeats = 6 # new repeat = new q-matrix for this 'run'. We set repeats to 3 for online experiments, and to 10 for offline experiments.
+repeats = 4 # new repeat = new q-matrix for this 'run'. We set repeats to 3 for online experiments, and to 10 for offline experiments.
 rsize = (32, 32)  # size of the images, the images displayed on screen should be in the same format
 ntrainimgs = 5  # number of images that the Hopfield net is trained with
 epsilon = 0.3  # exploration parameter

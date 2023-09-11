@@ -121,7 +121,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
 
         ''' uncomment the next line for a  realistic interaction with speech '''
 
-        #speech_choose_image(current_action)
+        speech_choose_image(current_action)
 
         display_image(constants.store_grids, 'yellowgrid%s' % current_action, constants.time3)
 
@@ -131,7 +131,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         filename = constants.store_imageswnoise  + '%s' % image_future + '.png'
         cv2.imwrite(filename, noise_img)
         time.sleep(constants.time7)
-        finish_display_image()
+        #finish_display_image()
 
 
         display_image(constants.store_imageswnoise , image_future, constants.time2)
@@ -152,7 +152,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         # img_res.save(img_name)
         concat_audio_visual2('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/', constants.store_gameimages, image_future)
         time.sleep(0.5)
-        finish_display_image()
+        #finish_display_image()
         print("checkpoint 1")
 
         ''' assistant providing audio depending on reward gained '''
@@ -189,7 +189,7 @@ def update_q(train_images, start_location, start_img, max_iter,  q, cumulative_r
         
 
         r_current, energy_current, energy_future = generate_reward(train_images, state_no, current_action, image_current, image_future)
-        print("cue_reward ", cue_reward)
+        print("cue_reward: ", cue_reward)
         rew_each_step_cogn_cue[i] = r_current
         r_current += int(cue_reward)
         rew_each_step_social_cue[i] = int(cue_reward)

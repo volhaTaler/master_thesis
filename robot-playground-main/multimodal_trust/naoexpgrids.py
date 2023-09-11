@@ -37,7 +37,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     td_storage = np.zeros(constants.iterations*constants.nruns+1)
     i = 0
     # set run condition
-    condition = 3
+    condition = 4
 
     #if repeat == 7 or repeat == 8 or repeat == 9 or repeat == 10 or repeat == 11 or repeat == 12:
 
@@ -51,21 +51,23 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         start_state = 5  # the middle position of the grid
         start_image = random.randint(0, constants.ntrainimgs - 1)
         print(q)
-        # speech_other("Hello my friend, let us play the game together. Please open the game grid.")
+        speech_other("Hello my friend, let us play the game together. Please open the game grid.")
         #speech_other2("Hello to you, I will give you assistance during the game. Sometimes I might deceive you.")
-        time.sleep(constants.time4)
+        #time.sleep(constants.time4)
+        time.sleep(0.5)
         display_image(constants.store_grids, 'basegrid', constants.time3)
-        # speech_choose_image(start_state)# --> what happens after the robot chose the image? -- for the cording of the video.
-        finish_display_image()
+        speech_choose_image(start_state)# --> what happens after the robot chose the image? -- for the cording of the video.
+        # finish_display_image()
         display_image(constants.store_grids, 'yellowgrid%s' % start_state, constants.time3)
         # display_grid('yellowgrid%s' % start_state)
+        time.sleep(0.5)
 
         noise_img = sp_noise(constants.get_gameimages, start_image, constants.probabilities[start_state])
 
         filename = constants.store_imageswnoise  + '%s' % start_image + '.png'
         cv2.imwrite(filename, noise_img)
     
-        finish_display_image()
+        #finish_display_image()
         # time.sleep(constants.time5)
         display_image(constants.store_imageswnoise , start_image, constants.time2) # why should we display image again?
         time.sleep(0.5)
@@ -77,7 +79,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
         
         filename_vis = '%s.png' % start_image
         img_res.save(filename_vis)
-        finish_display_image()
+        #finish_display_image()
 
         # record_audio
         #time.sleep(3)

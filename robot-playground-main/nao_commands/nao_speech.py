@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/anna/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
+sys.path.append("/home/volha/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
 
 from naoqi import ALProxy
 import time
@@ -7,7 +7,7 @@ import time
 def main():
 
 
-	IP, PORT = "130.149.244.203", 9559 
+	IP, PORT = "192.168.0.131", 9559 # 130.149.244.203
 	tts = ALProxy("ALTextToSpeech", IP, PORT)
 	animation = ALProxy("ALAnimationPlayer", IP, PORT)
 	posture = ALProxy("ALRobotPosture", IP, PORT)

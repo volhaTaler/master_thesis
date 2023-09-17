@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/anna/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
+sys.path.append("/home/volha/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
 
 from naoqi import ALProxy
 import time
@@ -42,8 +42,9 @@ def capture_robot_camera_nao(NAO_IP, PORT):
     # unsubscribe from the camera
     videoDevice_nao.unsubscribe(captureDevice_nao)
     return result[6], image
-
+time.sleep(0.5)
 result, image = capture_robot_camera_nao("130.149.244.203", 9559)
+time.sleep(0.5)
 img = Image.fromarray(image)
 img.save('/home/anna/MultimodalTrust/naocam/naocapture.png')
 left = 68

@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/anna/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
+sys.path.append("/home/volha/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
 import constants
 from naoqi import ALProxy
 import time
@@ -18,7 +18,7 @@ def speech_choose_image(image_number):
 	
 	#tts.say(str(user_msg)
 	#tts.say(str(user_msg2))
-	time.sleep(3)
+	time.sleep(2)
 	tts.say(str(user_msg))
 
 

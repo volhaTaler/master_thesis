@@ -30,13 +30,17 @@ def bipolarize_pattern_robot(pattern_name):
     # cv2.imshow("bin robo", bimg)
     # cv2.imshow("gray robot", gimg)
     # cv2.imshow("grsize", rimg)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.waitKey(0)
+   
+    cv2.destroyAllWindows()
 
     # convert 255 to -1 and 0 to 1
     bimg = bimg.astype('int64')
+    print("bipolorized 2")
     nonz_inds = bimg.nonzero()
+    print("bipolorized 3")
     bimg[nonz_inds], bimg[bimg == 0] = -1, 1  # convert 255 to -1 and 0 to 1
+    print("bipolorized 4")
 
     return bimg.flatten()
 
@@ -128,6 +132,20 @@ def display_image(path, image_name, timewait):
     show_img = 'eog --fullscreen ' + filename + ' &'
     time.sleep(timewait)  # this is used for training don't change
     os.system(show_img)
+
+def finish_display_image():
+    """Closes the window that displays the chosen image in full screen
+    Parameters
+    ----------
+    path: filename
+    location where the image is located
+    image_number: output from the Hopfield, the number of the image to be displayed.
+
+    """
+    done = "pkill eog"
+    os.system(done)
+
+
 
 
 

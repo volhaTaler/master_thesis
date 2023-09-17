@@ -18,7 +18,7 @@ def speech_choose_image(image_number):
 	
 	#tts.say(str(user_msg)
 	#tts.say(str(user_msg2))
-	time.sleep(3)
+	time.sleep(2)
 	tts.say(str(user_msg))
 
 

@@ -25,7 +25,7 @@ def predict_intention(condition=0, offline_mode=True):
     motion =  ALProxy("ALMotion", robotIP, 9559)
 
     videoDevice_nao = ALProxy('ALVideoDevice', robotIP, PORT)
-    filename = '/home/volha/Desktop/MSc/master_thesis/logs/online_cond3_20.02.23.txt'
+    filename = '/home/volha/Desktop/MSc/master_thesis/logs/record_test_14.03.23.txt'
    
      # positive numbers - interaction partner is on the right
     
@@ -48,7 +48,7 @@ def predict_intention(condition=0, offline_mode=True):
     dt = datetime.datetime.now()
     timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
     ### MUST BE CHANGED FOR EVERY strategy##
-    img_name = '/home/volha/Desktop/MSc/master_thesis/trail/online_cond3_20.02.23/' + timestamp + '_cond3.png' 
+    img_name = '/home/volha/Desktop/MSc/master_thesis/trail/record_test/' + timestamp + '_cond1.png' 
     img.save(img_name)
     if(offline_mode):
         time.sleep(0.3)

@@ -30,6 +30,8 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     total_reward_by_state = np.zeros(constants.length)
     td_storage = np.zeros(constants.iterations*constants.nruns+1)
     i = 0
+    # here we are talking about episodes. 
+    # One episode: a sequence of  states, actions and rewards which ends with terminal state.
     for run in range(0, constants.nruns):
         start_state = 5  # the middle position of the grid
         #print(q)
@@ -58,27 +60,28 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     print('the total iterations was: ', i)
 
 for repeat in np.arange(1, constants.repeats +1 , 1):
-    cumulative_reward = np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_cum_rew.npy' % repeat )
+    cumulative_reward = np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_cum_rew.npy' % repeat )
     cumulative_reward = cumulative_reward[cumulative_reward != 0]
-    state_visits = np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_state_visits.npy' % repeat )
+    state_visits = np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_state_visits.npy' % repeat )
 
-    energy_by_state = np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_energy_state.npy' % repeat )
+    energy_by_state = np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_energy_state.npy' % repeat )
 
-    final_q =  np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_end_q.npy' % repeat )
+    final_q =  np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_end_q.npy' % repeat )
 
     state_visits_div = np.where((state_visits==0), 1, state_visits)
-    temporal_difference = np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_td.npy' % repeat )
+    temporal_difference = np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_td.npy' % repeat )
     no_iterations = int(state_visits.sum()-1)
 
     # plot of cumulative rewards over iteration steps
-
+    
+    # iterations: max number of moveents in one run (episode)
     iterations = np.arange(0, len(cumulative_reward), 1)
     plt.figure()
     plt.plot(iterations, cumulative_reward[:constants.iterations*constants.nruns])
     plt.title('Cumulative reward')
     plt.xlabel('Iteration')
     plt.ylabel('Cumulative Reward')
-    plt.savefig('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_cum_rew.png' % repeat )
+    plt.savefig('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_cum_rew.png' % repeat )
     plt.close()
     #plt.show()
     plt.figure()
@@ -98,7 +101,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     cbar.set_label("Total Energy")
     plt.title('Energy by state')
     plt.xlabel('State')
-    plt.savefig('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_energy.png' % repeat )
+    plt.savefig('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_energy.png' % repeat )
     #plt.show()
     plt.figure()
     plt.imshow(final_q, extent=[0,20,0,20])
@@ -109,10 +112,10 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
                     labelbottom=False)
     cbar = plt.colorbar(img, orientation="horizontal")
     cbar.set_label("Q-value")
-    plt.savefig('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_q.png' % repeat )
+    plt.savefig('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_q.png' % repeat )
 
     #ax = sns.heatmap(final_q, cmap="YlGnBu")
-    #plt.savefig('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_q_heat.png' % repeat)
+    #plt.savefig('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/output_repeat%s_q_heat.png' % repeat)
 
 
     #plt.show()
@@ -122,7 +125,7 @@ for repeat in np.arange(1, constants.repeats +1 , 1):
     print('Number of times each state was visited during repeat %s: ' % repeat , state_visits)
 
 for repeat in np.arange(1, constants.repeats +1 , 1):
-    cumulative_reward = np.load('/home/anna/MultimodalTrust/phase/outputs/output_repeat%s_cum_rew.npy' % repeat )
+    cumulative_reward = np.load('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/outputs/phase/output_repeat%s_cum_rew.npy' % repeat )
     cumulative_reward = cumulative_reward[cumulative_reward != 0]
 
 var_holder = {}

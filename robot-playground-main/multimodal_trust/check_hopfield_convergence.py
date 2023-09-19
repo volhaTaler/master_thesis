@@ -20,7 +20,7 @@ for i in range(0, constants.ntrainimgs):
 
     for counter, value in enumerate(constants.probabilities):
         noise_img = sp_noise(i, value)
-        filename = '/home/volha/Desktop/MSc/master_thesis/robot-playground-main/phase/checks/images/%s' % counter + '.png'
+        filename = '/home/path/robot-playground-main/phase/checks/images/%s' % counter + '.png'
 
         cv2.imwrite(filename, noise_img)
         compare_pattern = bipolarize_pattern_robot(constants.get_gameimgesva  + '%s.png' % i)

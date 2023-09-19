@@ -1,7 +1,7 @@
 import sys
 import subprocess
 import datetime
-sys.path.append("/home/volha/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
+sys.path.append("/home/path/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
 from naoqi import ALProxy
 from PIL import Image
 import numpy as np
@@ -11,8 +11,8 @@ import random
 import constants
 import time
 
-TRUST_IMG_FOLDER = "/home/volha/Desktop/MSc/MSC_data/trail/images.05.01.23_cond1"
-UNTRUST_IMG_FOLDER = "/home/volha/Desktop/MSc/MSC_data/trail/images.05.01.23_cond2"
+TRUST_IMG_FOLDER = "/home/path/images_condition1"
+UNTRUST_IMG_FOLDER = "/home/path/images_condition2"
 
 def predict_intention(condition=0, offline_mode=True):
 
@@ -25,7 +25,7 @@ def predict_intention(condition=0, offline_mode=True):
     motion =  ALProxy("ALMotion", robotIP, 9559)
 
     videoDevice_nao = ALProxy('ALVideoDevice', robotIP, PORT)
-    filename = '/home/volha/Desktop/MSc/master_thesis/logs/record_test_14.03.23.txt'
+    filename = '/home/path/logs/record_test_14.03.23.txt'
    
      # positive numbers - interaction partner is on the right
     
@@ -47,8 +47,9 @@ def predict_intention(condition=0, offline_mode=True):
         img = img.crop((constants.p_left, constants.p_top, constants.p_right, constants.p_bottom))
     dt = datetime.datetime.now()
     timestamp = '%s-%s-%s_%s:%s:%s' % (dt.month, dt.day, dt.year, dt.hour, dt.minute, dt.second)
+
     ### MUST BE CHANGED FOR EVERY strategy##
-    img_name = '/home/volha/Desktop/MSc/master_thesis/trail/record_test/' + timestamp + '_cond1.png' 
+    img_name = '/home/path/record_test/' + timestamp + '_condition1.png' 
     img.save(img_name)
     if(offline_mode):
         time.sleep(0.3)

@@ -7,9 +7,8 @@ import constants
 import constants
 from audio import *
 
-'''This script trains the Hopfield Network. The playing Nao needs to be placed in front of an external monitor. 
- The training images will be displayed on the external monitor. The speaking Nao needs to be equipped with a micro and
- placed near the playing Nao. The speaking Nao will say each word once. The images and sound will be cncatenated and saved.'''
+'''This script trains the Hopfield Network. The playing Pepper needs to be placed in front of an external monitor. 
+ The training images will be displayed on the external monitor. The disoayed image will be saved.'''
 
 cv2.CV_LOAD_IMAGE_GRAYSCALE = 0
 cv2.CV_LOAD_IMAGE_COLOR = 0
@@ -30,16 +29,10 @@ for nimage in range(0, constants.ntrainimgs):
 
 time.sleep(1)
 
-# for nimage in (0,0,1,2,3,4):
-#    time.sleep(constants.time1)
-#    audio_pepper(constants.store_audio, nimage)
-#    preprocess_audio_data(constants.store_audio, nimage)
-# concat_audio_visual(constants.store_audio, constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
-#   concat_audio_visual(constants.store_vtrainimgs, constants.store_vatrainimgs, nimage)
 
 #bipolarise the training images and format them ready to be passed in the Hopfield net
 
 train_imgs = bipolarize_pattern_robot_train(constants.store_vatrainimgs, constants.ntrainimgs)
 
 
-np.save('/home/volha/Desktop/MSc/master_thesis/robot-playground-main/multimodal_trust/store_train_audioimg/train_imgs.npy', train_imgs)
+np.save('/home/path/robot-playground-main/multimodal_trust/store_train_audioimg/train_imgs.npy', train_imgs)

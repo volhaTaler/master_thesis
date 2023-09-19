@@ -1,13 +1,14 @@
 
+# here we put the code to plot average rewards for both settings for every behaviral strategy.
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-PATH_OFF = "/home/volha/Desktop/ROMAN2023_resources/results/average_rewards_offline/"
+PATH_OFF = "/home/path1/"
+PATH_ON = "/home/path2/"
 
-PATH_ON = "/home/volha/Desktop/ROMAN2023_resources/results/average_rewards_online/"
-
-PATH_comparison = "/home/volha/Desktop/MSc/MSC_data/experiment_results/averages_reward/part/"
+PATH_comparison = "/home/path3/"
 
 def plot_reward(arr, filepath, x_label, y_label, legend_pos):
     # plt.xticks(np.arange(0, 136, 10.0))
@@ -17,7 +18,6 @@ def plot_reward(arr, filepath, x_label, y_label, legend_pos):
         data = np.load(file)
         img_name = filepath
         #plt.plot(data[0])
-        
         if "cond1" in file:
             plt.plot(data, label="Reliable")
         elif "cond2" in file:

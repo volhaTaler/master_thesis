@@ -1,12 +1,13 @@
+
+# code to create an overview of the made pedictions of the social cues
+
 import matplotlib.pyplot as plt 
 import numpy as np
 import pandas as pd
 import openpyxl
 import os
 
-PATH_TO_LOGS = "/home/volha/Desktop/MSc/MSC_data/logs/"
-# "/home/volha/Desktop/MSc/master_thesis/logs/"
-#"/home/volha/Desktop/MSc/MSC_data/logs/"
+PATH_TO_LOGS = "/home/path/logs/"
 
 results = {0: 0, 1: 0, -1: 0}
 zeros = []
@@ -66,7 +67,7 @@ for file in files:
     conds = []
     total = []
 frames = pd.concat(DATAS)
-frames.to_excel('social_cues_all2.xlsx', index=False, header=True)
+frames.to_excel('social_cues_all.xlsx', index=False, header=True)
 
 
 

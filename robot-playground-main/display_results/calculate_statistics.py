@@ -1,18 +1,22 @@
+
+# here we proccess collected data: total reward, energy, number of steps, number of help requests,
+# as well as number of the generated social cues  
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 
-path01 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/18_offline_cond1_FIXED_18.02.23/"
-path02 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/18_offline_cond2_18.02.23/"
-path03 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/18_offline_cond3_fixed_18.02.23/"
-path04 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/18_offline_cond4_19.02.23/"
+path01 = "/home/Desktop/MSc/path1"
+path02 = "/home/Desktop/MSc/path2"
+path03 = "/home/Desktop/MSc/path3"
+path04 = "/home/Desktop/MSc/path4"
 
 
-path1 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/20_online_cond1_20.02.23_10episodes_6runs/"
-path2 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/20_online_cond2_full_20.02.23_6runs_10_episodes/"
-path3 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/20_online_cond3_20.02.23_6runs_10episodes/"
-path4 = "/home/volha/Desktop/MSc/MSC_data/experiment_results/20_online_cond4_20.02.23/"
+path1 = "/home/Desktop/MSc/path5"
+path2 = "/home/Desktop/MSc/path6"
+path3 = "/home/Desktop/MSc/path7"
+path4 = "/home/Desktop/MSc/path8"
 
 
 all_files = [path1, path2, path3, path4, path01, path02, path03, path04]
@@ -61,7 +65,7 @@ def print_stast_en():
             average_per_step[repeat-1] = cumulative_energy_plot[-1]/last_ind
             total_energy = cumulative_energy_plot[int(last_ind)-1]
             total_en_array[repeat-1] = total_energy
-            #f('Trustworthy' in title[i]):
+            #if('Trustworthy' in title[i]):
                 # print("Array of steps: ", str(repeat), ": ", str(cumulative_energy))
             
             for j in range(1, last_ind):
@@ -85,10 +89,7 @@ print_stast_en()
 
 
 def print_steps():
-   
-
    for i, filepath in enumerate(all_files):
-        
         
         for repeat in np.arange(1, 11):
             cumulative_reward = np.load(filepath + '%s_cum_rew.npy' % repeat)

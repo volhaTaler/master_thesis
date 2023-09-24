@@ -1,7 +1,6 @@
-# master_thesis
-Code for my master thesis which is devoted to the challenge of the human-robot interaction.
+# Code for my master thesis which is devoted to the challenge of the human-robot interaction.
 
-Abstract
+# Abstract
 
 Trust is social glue required for the development of any ecient relationship, which is crucial not only in the interpersonal context but also in the human-
 robot interactions. Today, researchers are putting significant eort into creating social human-like robots, which would behave like people and be able to express

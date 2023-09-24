@@ -14,7 +14,7 @@ partners based on both: (i) the cognitive load (i.e., the cost of perceptual pro
 In order to evaluate the ecacy of the framework, the Pepper robot was set to accomplish a visual recall task. During this task the robot interacted with human partners, which followed dierent behavioral strategies: reliable, unreliable, deceptive, or random. Overall, the results indicate that the proposed framework
 allows the Pepper robot to dierentiate the guiding strategies from each other and choose the most trustworthy partner in the situation when a free choice of the interaction partner for the next task is oered. It also provides a hint on how to recognize if an interaction partner acts in a deceptive manner.
 
-The contect of the work was summirized as a scientific paper and presented at the IEEE RO-MAN2023 conference:
+The content of this master thesis was summarized as a scientific paper and presented at the IEEE RO-MAN2023 conference:
 Volha Taliaronak, Anna L. Lange, Murat Kirtay, Erhan Oztop, and
 Verena V. Hafner. “Advancing Humanoid Robots for Social Integration:
 Evaluating Trustworthiness through a Social Cognitive Framework”. In:

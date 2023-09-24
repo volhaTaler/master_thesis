@@ -17,7 +17,7 @@ UNTRUST_IMG_FOLDER = "/home/path/images_condition2"
 def predict_intention(condition=0, offline_mode=True):
 
     SubID = "NAO"
-    robotIP = "192.168.0.131" 
+    robotIP = "" 
     PORT = 9559
     posture_service = ALProxy("ALRobotPosture", robotIP, PORT)
     tts = ALProxy("ALTextToSpeech", robotIP, PORT)
@@ -25,7 +25,7 @@ def predict_intention(condition=0, offline_mode=True):
     motion =  ALProxy("ALMotion", robotIP, 9559)
 
     videoDevice_nao = ALProxy('ALVideoDevice', robotIP, PORT)
-    filename = '/home/path/logs/record_test_14.03.23.txt'
+    filename = '/home/path/logs/record_test.txt'
    
      # positive numbers - interaction partner is on the right
     
